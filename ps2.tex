@@ -1,0 +1,116 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+	% packages that allow mathematical formatting
+
+\usepackage{graphicx}
+	% package that allows you to include graphics
+
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{Problem Set 2}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+
+
+\section*{Problems}
+
+\paragraph{(3.2)}
+The OLS coefficient of the regression of $Y$ on $Z$ is
+\[ (Z'Z)^{-1}(Z'Y) = (C'X'XC)^{-1}(C'X'Y) = C^{-1} (X'X)^{-1} (C')^{-1} C'X'Y = C^{-1}(X'X)^{-1} X'Y = C^{-1}\beta \]
+where $\beta$ is the OLS coefficient from the regression of $Y$ on $X$.
+
+The residual of OLS of $Y$ on $Z$ is
+\[ Y - Z C^{-1}\beta = Y - X \beta \]
+which is exactly the residual of OLS of $Y$ on $X$.
+\paragraph{(3.4)}
+We have
+\[ e = Y - X\beta \]
+\[ X_2'e = X_2' Y - X_2' X (X'X)^{-1} X'Y \]
+\[ =  X_2' Y - X_2' \begin{bmatrix}X_1 & X_2 \end{bmatrix} \left(\begin{bmatrix}X_1' \\ X_2' \end{bmatrix}\begin{bmatrix}X_1 & X_2 \end{bmatrix}\right)^{-1} \begin{bmatrix}X_1' \\ X_2' \end{bmatrix}Y \]
+\[ =  X_2' Y -  \begin{bmatrix}X_2'X_1 & X_2'X_2 \end{bmatrix} \left(\begin{bmatrix}X_1'X_1 & X_1'X_2 \\ X_2'X_1 & X_2'X_2 \end{bmatrix}\right)^{-1} \begin{bmatrix}X_1'Y \\ X_2'Y \end{bmatrix} \]
+Since $\begin{bmatrix}X_2'X_1 & X_2'X_2 \end{bmatrix} \left(\begin{bmatrix}X_1'X_1 & X_1'X_2 \\ X_2'X_1 & X_2'X_2 \end{bmatrix}\right)^{-1}$ gives the bottom $k_2$ rows of the identity matrix, we have
+\[ =  X_2' Y -  X_2' Y = 0 \]
+So $X_2'e = 0$.
+
+\paragraph{(3.5)}
+The regression coefficient is
+\[ (X'X)^{-1}(X'e) = (X'X)^{-1}(X'(Y - X\beta))  \]
+\[ = (X'X)^{-1}(X'Y - X'X(X'X)^{-1}(X'Y)) \]
+\[ = (X'X)^{-1}(X'Y - X'Y) \]
+\[ = 0 \]
+\paragraph{(3.6)}
+The OLS coefficient is given by
+\[ (X'X)^{-1} (X'\hat{Y}) = (X'X)^{-1} (X'(X(X'X)^{-1}X'Y)) = (X'X)^{-1} (X'X)(X'X)^{-1}X'Y = (X'X)^{-1}X'Y \]
+\paragraph{(3.10)}
+\[ P = X'(X'X)^{-1}X = \begin{bmatrix}X_1'\\X_2'\end{bmatrix}\left(\begin{bmatrix}X_1'X_1 & X_1'X_2 \\ X_2'X_1 & X_2'X_2 \end{bmatrix}\right)^{-1}\begin{bmatrix}X_1 & X_2\end{bmatrix} \]
+\[= \begin{bmatrix}X_1'\\X_2'\end{bmatrix}\left(\begin{bmatrix}X_1'X_1 & 0 \\ 0 & X_2'X_2 \end{bmatrix}\right)^{-1}\begin{bmatrix}X_1 & X_2\end{bmatrix} \]
+\[= \begin{bmatrix}X_1'\\X_2'\end{bmatrix}\begin{bmatrix}(X_1'X_1)^{-1} & 0 \\ 0 & (X_2'X_2)^{-1} \end{bmatrix}\begin{bmatrix}X_1 & X_2\end{bmatrix} \]
+\[= X_1'(X_1'X_1)^{-1}X_1 + X_2'(X_2'X_2)^{-1}X_2\]
+\[ = P_1 + P_2 \]
+\paragraph{(3.11)}
+Denote $1_k = \begin{bmatrix}
+  1 & 1 & ... & 1
+\end{bmatrix}$. Then
+\[ n^{-1} 1_n \hat{Y} = n^{-1} 1_n X(X'X)^{-1}X' Y \]
+Since $X$ contains a constant,
+\[ X = \begin{bmatrix} c 1_n' & X_2 \end{bmatrix} \]
+\[ n^{-1} 1_n \hat{Y} = n^{-1} 1_n \begin{bmatrix} c 1_n' & X_2 \end{bmatrix}\left(\begin{bmatrix} nc^2 & c 1_n X_2 \\ c X_2'1_n & X_2'X_2 \end{bmatrix}\right)^{-1}\begin{bmatrix} c 1_n \\ X_2' \end{bmatrix} Y \]
+\[ n^{-1} 1_n \hat{Y} = n^{-1} \begin{bmatrix} n c & 1_n X_2 \end{bmatrix}\left(\begin{bmatrix} nc^2 & c 1_n X_2 \\ c X_2'1_n & X_2'X_2 \end{bmatrix}\right)^{-1}\begin{bmatrix} c 1_n \\ X_2' \end{bmatrix} Y \]
+\[ n^{-1} 1_n \hat{Y} = n^{-1}c^{-1} \begin{bmatrix} n c^2 & c1_n X_2 \end{bmatrix}\left(\begin{bmatrix} nc^2 & c 1_n X_2 \\ c X_2'1_n & X_2'X_2 \end{bmatrix}\right)^{-1}\begin{bmatrix} c 1_n \\ X_2' \end{bmatrix} Y \]
+Since
+\[ \begin{bmatrix} n c^2 & c1_n X_2 \\ c X_2'1_n & X_2'X_2 \end{bmatrix}\left(\begin{bmatrix} nc^2 & c 1_n X_2 \\ c X_2'1_n & X_2'X_2 \end{bmatrix}\right)^{-1} = I \]
+\[\begin{bmatrix} \begin{bmatrix} n c^2 & c1_n X_2 \end{bmatrix} \\ \begin{bmatrix} c X_2'1_n & X_2'X_2 \end{bmatrix} \end{bmatrix}\left(\begin{bmatrix} nc^2 & c 1_n X_2 \\ c X_2'1_n & X_2'X_2 \end{bmatrix}\right)^{-1} = I \]
+\[\begin{bmatrix} \begin{bmatrix} n c^2 & c1_n X_2 \end{bmatrix}\left(\begin{bmatrix} nc^2 & c 1_n X_2 \\ c X_2'1_n & X_2'X_2 \end{bmatrix}\right)^{-1} \\ \begin{bmatrix} c X_2'1_n & X_2'X_2 \end{bmatrix}\left(\begin{bmatrix} nc^2 & c 1_n X_2 \\ c X_2'1_n & X_2'X_2 \end{bmatrix}\right)^{-1} \end{bmatrix} = I \]
+Hence
+\[\begin{bmatrix} n c^2 & c1_n X_2 \end{bmatrix}\left(\begin{bmatrix} nc^2 & c 1_n X_2 \\ c X_2'1_n & X_2'X_2 \end{bmatrix}\right)^{-1} = \begin{bmatrix} 1 & 0 & 0 & ... & 0 \end{bmatrix} \]
+So,
+\[ n^{-1} 1_n \hat{Y} = n^{-1}c^{-1} \begin{bmatrix} n c^2 & c1_n X_2 \end{bmatrix}\left(\begin{bmatrix} nc^2 & c 1_n X_2 \\ c X_2'1_n & X_2'X_2 \end{bmatrix}\right)^{-1}\begin{bmatrix} c 1_n \\ X_2' \end{bmatrix} Y \]
+\[ = n^{-1}c^{-1} \begin{bmatrix} 1 & 0 & 0 & ... & 0 \end{bmatrix}\begin{bmatrix} c 1_n \\ X_2' \end{bmatrix} Y \]
+\[ = n^{-1}c^{-1} \begin{bmatrix} c 1_n Y \end{bmatrix} \]
+\[ = n^{-1} 1_n Y \]
+\[ = \bar{Y} \]
+
+as desired.
+\paragraph{(3.13)}
+\begin{enumerate}[label=(\alph*)]
+  \item Let $D = \begin{bmatrix} D_1 & D_2 \end{bmatrix}$. Then
+  \[ D'D = \begin{bmatrix} D_1'D_1 & D_1'D_2 \\ D_2'D_1 & D_2'D_2 \end{bmatrix} = \begin{bmatrix} N_M & 0 \\ 0 & N_W \end{bmatrix}  \]
+  where $N_M, N_W$ denote the number of men and women respectively. Hence
+  \[ (D'D)^{-1} = \begin{bmatrix} N_M & 0 \\ 0 & N_W \end{bmatrix}^{-1} =  \begin{bmatrix} 1/N_M & 0 \\ 0 & 1/N_W \end{bmatrix} \]
+  So
+  \[ \begin{bmatrix} \gamma_1 \\ \gamma_2 \end{bmatrix} = (D'D)^{-1}D'y = \begin{bmatrix}
+  (1/N_M) D_1'Y \\ (1/N_W) D_2'Y
+  \end{bmatrix} =  \begin{bmatrix}
+  \bar{Y_1} \\ \bar{Y_2}
+  \end{bmatrix}\]
+  \item The $Y$ transformation normalizes $Y$ by subtracting out the subgroup mean, i.e. subtracting the average of the men's $Y$ for men and the average of the women's $Y$ for women. $X$ is the same; subtracts the average $X$ vector of men for men, and the average $X$ vector of women for women.
+  \item Note that by part a, $Y^*$ is the regression residual of $Y$ on $D= [D_1 \ D_2]$. Similarly, by part a, $X^*$ is the regression residual of $X$ on $D = [D_1 \ D_2]$. By Frisch-Waugh-Lovell, then, $\tilde{\beta} = \hat{\beta}$, since we are regressing the residuals of $Y$ on $D$ on the residuals of $X$ on $D$.
+ \end{enumerate}
+
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
