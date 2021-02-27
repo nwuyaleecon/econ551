@@ -1,0 +1,104 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+	% packages that allow mathematical formatting
+
+\usepackage{graphicx}
+	% package that allows you to include graphics
+
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{Problem Set 3}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+
+
+\section*{Problem 1}
+We know
+\[ \hat\beta = \begin{bmatrix}
+1 & n^{-1}\sum \tilde{x}_i \\
+n^{-1}\sum \tilde{x}_i & n^{-1}\sum \tilde{x}_i^2
+\end{bmatrix}^{-1} \begin{bmatrix}
+ n^{-1}\sum y_i \\ n^{-1}\sum \tilde{x}_iy_i
+\end{bmatrix}  \]
+\[ = \frac{1}{(n^{-1}\sum \tilde{x}_i^2 )- \bar{\tilde{x}}^2}\begin{bmatrix}
+n^{-1}\sum \tilde{x}_i^2 & -n^{-1}\sum \tilde{x}_i \\
+-n^{-1}\sum \tilde{x}_i & 1
+\end{bmatrix} \begin{bmatrix}
+ n^{-1}\sum y_i \\ n^{-1}\sum \tilde{x}_iy_i
+\end{bmatrix}  \]
+\[ \hat{\beta}_2 = \frac{1}{(n^{-1}\sum \tilde{x}_i^2 )- \bar{\tilde{x}}^2}\left( -\bar{\tilde{x}}n^{-1}\sum y_i + n^{-1}\sum \tilde{x}_iy_i \right) \]
+\[  = \frac{1}{(n^{-1}\sum \tilde{x}_i^2 )- \bar{\tilde{x}}^2}\left(  n^{-1}\sum ( \tilde{x}_i-\bar{\tilde{x}})y_i \right) \]
+\[  = \sum \frac{n^{-1}(\tilde{x}_i-\bar{\tilde{x}}) }{(n^{-1}\sum \tilde{x}_i^2 )- \bar{\tilde{x}}^2} y_i \]
+\[  = \sum \frac{\tilde{x}_i-\bar{\tilde{x}} }{\sum \tilde{x}_i^2 - n\bar{\tilde{x}}^2} y_i \]
+\[  = \sum \frac{\tilde{x}_i-\bar{\tilde{x}} }{\sum \tilde{x}_i^2 - 2n\bar{\tilde{x}}^2 + n\bar{\tilde{x}}^2} y_i \]
+\[  = \sum \frac{\tilde{x}_i-\bar{\tilde{x}} }{\sum \tilde{x}_i^2 - 2\bar{\tilde{x}}\sum \tilde{x}_i + n\bar{\tilde{x}}^2} y_i \]
+\[  = \sum \frac{\tilde{x}_i-\bar{\tilde{x}} }{\sum \tilde{x}_i^2 - \sum 2\bar{\tilde{x}}\tilde{x}_i + \sum \bar{\tilde{x}}^2} y_i \]
+\[  = \sum \frac{\tilde{x}_i-\bar{\tilde{x}} }{\sum (\tilde{x}_j - \bar{\tilde{x}})^2} y_i \]
+\[  = \sum \omega_i y_i \]
+
+\section*{Problem 2}
+\begin{enumerate}[label=(\alph*)]
+  \item We know
+  \[ \gamma = E[xx']^{-1}E[xy] \]
+  \[ = E\begin{bmatrix}
+    1 & w_1 & w_2 \\
+    w_1 & w_1^2 & w_1w_2 \\
+    w_2 & w_1w_2 & w_2^2
+  \end{bmatrix}^{-1} E\begin{bmatrix}
+    1(w_2^2 + e)  \\
+    w_1(w_2^2 + e)  \\
+    w_2(w_2^2 + e)
+  \end{bmatrix} \]
+  \[ = \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & Ew_1^2 & 0 \\
+    0 & 0 & Ew_2^2
+  \end{bmatrix}^{-1} \begin{bmatrix}
+    E(w_2^2 + e)  \\
+    E(w_1(w_2^2 + e))  \\
+    E(w_2(w_2^2 + e))
+  \end{bmatrix} \]
+  \[ = \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1/Ew_1^2 & 0 \\
+    0 & 0 & 1/Ew_2^2
+  \end{bmatrix} \begin{bmatrix}
+    E(w_2^2)  \\
+    E(w_1 w_2^2 )  \\
+    E(w_2^3)
+  \end{bmatrix} \]
+  \[ = \begin{bmatrix}
+    E(w^2) \\
+    E(w_1w_2^2)/E(w_1^2)  \\
+    E(w_2^3)/Ew_2^2
+  \end{bmatrix}  \]
+  \item The average causal effect should be $0$, since $m(x)$ has no dependence on $w_1$. However, $\gamma_1 = E(w_1w_2^2)/E(w_1^2)$ which might not be 0. So $\gamma_1$ doesn't necessarily estimate the average causal effect of $w_1$.
+\end{enumerate}
+
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
