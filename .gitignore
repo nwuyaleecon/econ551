@@ -4,3 +4,5 @@
 *.fdb_latexmk
 *.log
 *.synctex.gz
+ps_env/*
+.ipynb_checkpoints/*

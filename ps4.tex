@@ -1,0 +1,117 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+	% packages that allow mathematical formatting
+
+\usepackage{graphicx}
+	% package that allows you to include graphics
+
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{Problem Set 3}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+
+
+\section*{7.2}
+Using the WLLN, we have
+\[ \frac{1}{n}\sum_{i} X_i X_i' \to_p E[XX'] \]
+Also, we have
+\[ \frac{1}{n}\sum_i X_i Y_i \to_p E[XY] = E[\beta XX' + Xe] = \beta E[XX'] \]
+Further, since $\lambda$ is constant, we have
+\[ \frac{\lambda}{n} I_k \to_p 0 \]
+Therefore,
+\[ \hat{\beta} = \left(\frac{1}{n}\sum_{i} X_i X_i' + \frac{\lambda}{n} I_k \right)^{-1}\left(\frac{1}{n}\sum_i X_i Y_i \right) \]
+\[ \to_p (E[XX'])^{-1}(\beta E[XX']) \]
+\[ = \beta \]
+Hence this estimator is consistent.
+\section*{7.3}
+See the previous problem. In this case, we have
+\[ \hat{\beta} = \left(\frac{1}{n}\sum_{i} X_i X_i' + \frac{\lambda}{n} I_k \right)^{-1}\left(\frac{1}{n}\sum_i X_i Y_i \right) \]
+\[ = \left(\frac{1}{n}\sum_{i} X_i X_i' + c I_k \right)^{-1}\left(\frac{1}{n}\sum_i X_i Y_i \right) \]
+\[ \to_p \beta (E[XX'] + cI_k)^{-1}E[XX'] \]
+Since $(E[XX'] + cI_k)^{-1}E[XX'] \neq 1$ generically, this is not consistent.
+\section*{7.8}
+\[ \sqrt{n} \left(\hat{\sigma}^2 - \sigma^2 \right) = \sqrt{n} \left(\frac{1}{n}\sum_i (Y_i - X_i'\hat{\beta})^2 - E[(Y - X'\beta)^2] \right) \]
+\[ = \sqrt{n} \left(\frac{1}{n}\sum_i (Y_i - X_i'\beta + X_i'\beta - X_i'\hat{\beta})^2 - E[(Y - X'\beta)^2] \right) \]
+\[ = \sqrt{n} \left(\frac{1}{n}\sum_i (Y_i - X_i'\beta)^2+ 2\frac{1}{n}\sum_i (X_i'\beta - X_i'\hat{\beta})'(Y_i - X_i'\beta) + \frac{1}{n}\sum_i (X_i'\beta - X_i'\hat{\beta})^2 - E[(Y - X'\beta)^2] \right) \]
+\[ = \sqrt{n} \left(\frac{1}{n}\sum_i (Y_i - X_i'\beta)^2 + 2\frac{1}{n}\sum_i (\beta - \hat{\beta})'(X_iY_i - X_iX_i'\beta) + \frac{1}{n}\sum_i (\beta - \hat{\beta})X_iX_i'(\beta - \hat{\beta})' - E[(Y - X'\beta)^2] \right) \]
+\[ = \sqrt{n} \left(\frac{1}{n}\sum_i (Y_i - X_i'\beta)^2 + 2\frac{1}{n}\sum_i (\beta - \hat{\beta})'(X_ie_i) + (\beta - \hat{\beta})\left(\frac{1}{n}\sum_i X_iX_i'\right)(\beta - \hat{\beta})' - E[(Y - X'\beta)^2] \right) \]
+\[ = \sqrt{n}(\beta - \hat{\beta})'\left(2\frac{1}{n}\sum_i X_ie_i\right) + \sqrt{n}(\beta - \hat{\beta})'\left(\left(\frac{1}{n}\sum_i X_iX_i'\right)(\beta - \hat{\beta}) \right) + \sqrt{n} \left(\frac{1}{n}\sum_i e_i^2  - E[e^2] \right) \]
+Now, we know that $\sqrt{n}(\beta - \hat{\beta}) \to_d N(0, V_\beta)$. By the WLLN, we also have
+\[ \frac{1}{n}\sum_i X_ie_i \to_p E[Xe] = 0 \]
+\[ \frac{1}{n}\sum_i X_iX_i' \to_p E[XX']  \]
+Finally, from consistency of $\hat{\beta}$, we get:
+\[ \beta - \hat{\beta} \to_p \beta - \beta = 0 \]
+So putting these together, we get
+\[ \sqrt{n}(\beta - \hat{\beta})'\left(2\frac{1}{n}\sum_i X_ie_i\right) \to_d 0 \]
+\[ \sqrt{n}(\beta - \hat{\beta})'\left(\left(\frac{1}{n}\sum_i X_iX_i'\right)(\beta - \hat{\beta}) \right) \to_d 0 \]
+And by the CLT,
+\[ \sqrt{n} \left(\frac{1}{n}\sum_i e_i^2  - E[e^2] \right) \to_d N(0, V(e))\]
+Hence,
+\[ \sqrt{n} \left(\hat{\sigma}^2 - \sigma^2 \right) \to_d N(0, V(e)) \]
+
+\section*{7.10}
+\begin{enumerate}[label=(\alph*)]
+  \item The point estimator is just $x'\hat{\beta}$.
+  \item To estimate variance, we have
+  \[ V(x'\beta) = x'V(\beta)x \]
+  So
+  \[ \widehat{V(x'\beta)} = x'\widehat{V(\beta)}x = x'\widehat{\sigma}^2(x'x)^{-1}x = \widehat{\sigma}^2x'(x'x)^{-1}x \]
+\end{enumerate}
+\section*{7.28}
+\begin{enumerate}[label=(\alph*)]
+  \item See code.
+  \[ \hat {\beta}_1, \hat{s}_1 \approx 0.0904, 0.003  \]
+  \[ \hat{\beta}_2, \hat{s}_2 \approx 0.0354, 0.003  \]
+  \[ \hat{\beta}_3, \hat{s}_3 \approx -0.0465, 0.005 \]
+  \[ \hat{\beta}_4, \hat{s}_4 \approx 1.1852, 0.046 \]
+  \item
+  The marginal value of experience is given by
+  \[ \beta_2 + 2\beta_3 (experience)/100  = \beta_2 + \beta_3/5 \]
+  where we have evaluated at $experience = 10$ as the problem asks.
+  \[ \theta = \frac{\beta_1}{\beta_2 + \beta_3/5} \]
+  \[ \hat{\theta} \approx 3.4683 \]
+  \item Let $g(\beta) = \beta_1 / (\beta_2 + \beta_3/5)$. Then
+  \[ G(\beta) = \frac{\partial g}{\partial \beta} = \begin{bmatrix} \frac{1}{\beta_2 + \beta_3/5} & -\frac{\beta_1}{(\beta_2 + \beta_3/5)^2} & -\frac{\beta_1/5}{(\beta_2 + \beta_3/5)^2} & 0  \end{bmatrix}  \]
+  Then by the delta method,
+  \[ \sqrt{n}(\hat{\theta} - \theta) \to_d N(0, G(\beta)V_\beta G(\beta)') \]
+  The estimated standard deviation is $\hat{s}_\theta = \sqrt{\widehat{G(\beta)}\widehat{V_\beta} \widehat{G(\beta)}'} \approx 0.2267$.
+  \item The confidence interval is
+  \[ \left[ \hat{\theta} - \frac{1}{\sqrt{n}}\hat{s}_\theta z_{.95} , \hat{\theta} + \frac{1}{\sqrt{n}}\hat{s}_\theta z_{.95}  \right] \]
+  \[ \approx [3.4626, 3.4741] \]
+  \item The desired estimate is $h(\beta) = 12\beta_1 + 20 \beta_2 + 4 \beta_3 + \beta_4$. Define
+  \[ H(\beta) = \begin{bmatrix} 12 & 20 & 4 & 1\end{bmatrix} \]
+  \[ \sqrt{n}(\widehat{h(\beta)} - h(\beta)) \to_d N(0, H(\beta)V_\beta H(\beta)')\]
+  The standard deviation estimator is then $\hat{s}_h = \widehat{H(\beta)}\widehat{V_\beta}\widehat{H(\beta)}' \approx 0.0117$
+  Our confidence interval is then
+  \[ \left[ \hat{h} - \frac{1}{\sqrt{n}}\hat{s}_h z_{.975} , \hat{h} + \frac{1}{\sqrt{n}}\hat{s}_h z_{.975}  \right] \]
+  \[ \approx [2.7918, 2.7925] \]
+\end{enumerate}
+
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
