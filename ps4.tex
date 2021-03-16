@@ -26,7 +26,7 @@
 	% line of code telling latex that your document is beginning
 
 
-\title{Problem Set 3}
+\title{Problem Set 4}
 
 \author{Nicholas Wu}
 
@@ -102,15 +102,15 @@ Hence,
   \[ \sqrt{n}(\hat{\theta} - \theta) \to_d N(0, G(\beta)V_\beta G(\beta)') \]
   The estimated standard deviation is $\hat{s}_\theta = \sqrt{\widehat{G(\beta)}\widehat{V_\beta} \widehat{G(\beta)}'} \approx 0.2267$.
   \item The confidence interval is
-  \[ \left[ \hat{\theta} - \frac{1}{\sqrt{n}}\hat{s}_\theta z_{.95} , \hat{\theta} + \frac{1}{\sqrt{n}}\hat{s}_\theta z_{.95}  \right] \]
-  \[ \approx [3.4626, 3.4741] \]
+  \[ \left[ \hat{\theta} - \hat{s}_\theta z_{.95} , \hat{\theta} + \hat{s}_\theta z_{.95}  \right] \]
+  \[ \approx [3.0954, 3.8413] \]
   \item The desired estimate is $h(\beta) = 12\beta_1 + 20 \beta_2 + 4 \beta_3 + \beta_4$. Define
   \[ H(\beta) = \begin{bmatrix} 12 & 20 & 4 & 1\end{bmatrix} \]
   \[ \sqrt{n}(\widehat{h(\beta)} - h(\beta)) \to_d N(0, H(\beta)V_\beta H(\beta)')\]
   The standard deviation estimator is then $\hat{s}_h = \widehat{H(\beta)}\widehat{V_\beta}\widehat{H(\beta)}' \approx 0.0117$
   Our confidence interval is then
-  \[ \left[ \hat{h} - \frac{1}{\sqrt{n}}\hat{s}_h z_{.975} , \hat{h} + \frac{1}{\sqrt{n}}\hat{s}_h z_{.975}  \right] \]
-  \[ \approx [2.7918, 2.7925] \]
+  \[ \left[ \hat{h} - \hat{s}_h z_{.975} , \hat{h} + \hat{s}_h z_{.975}  \right] \]
+  \[ \approx [2.7693, 2.8150] \]
 \end{enumerate}
 
 \end{document}
