@@ -1,0 +1,56 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+	% packages that allow mathematical formatting
+
+\usepackage{graphicx}
+	% package that allows you to include graphics
+
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{Problem Set 5}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+
+
+\section*{12.1}
+The estimator is
+\[ \hat{\beta}_{IV} = \frac{\sum_i y_i d_i}{\sum_i z_i d_i} = \frac{\sum_{i \mid d_i = 1} y_i }{\sum_{i \mid d_i = 1} z_i} \]
+\section*{12.8}
+Let $X = \begin{bmatrix} 1 & P & Y \end{bmatrix}'$, $Z = \begin{bmatrix} 1 & W & Y \end{bmatrix}'$, and let $a = \begin{bmatrix} a_0 & a_1 & a_2 \end{bmatrix}'$. Then we have
+\[Q = X'a + e_1 \]
+\[ ZQ = ZX'a + Ze_1 \]
+\[ E[ZQ] = E[ZX']a + E[Ze_1] \]
+Since $Z$ is determined outside the market, $E[Ze_1] = 0$, so
+\[ a = (E[ZX'])^{-1}E[ZQ] \]
+so $a$ is identified as long as $E[ZX']$ is invertible. Similarly, if we let $X_2 = \begin{bmatrix} 1 & P & W \end{bmatrix}'$, we get
+\[ b = (E[ZX_2'])^{-1}E[ZQ] \]
+so $b$ is identified as long as $E[ZX_2']$ is invertible.
+\section*{12.25, 13.28}
+See code notebook, commentary there.
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
