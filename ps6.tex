@@ -1,0 +1,108 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+	% packages that allow mathematical formatting
+
+\usepackage{graphicx}
+	% package that allows you to include graphics
+
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{Problem Set 6}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+
+
+\section*{Problem 1}
+\begin{enumerate}[label=(\alph*)]
+\item From the moment equations,
+\[ E(1-w\theta) = 0 \]
+\[ E(w)\theta = 1 \]
+\[ \theta = 1\]
+and
+\[ E(\theta^3 - x) = 0 \]
+\[ E(x) = 1 \]
+Hence, the optimal weighting matrix is
+\[ E(g'g)^{-1} = E\begin{bmatrix} (\theta^3 - x)^2 & (\theta^3 - x)(1-w\theta) \\ (\theta^3 - x)(1-w\theta) & (1 - w\theta)^2 \end{bmatrix}^{-1} \]
+\[ = E\begin{bmatrix} (1-x)^2 & (1-x)(1-w) \\ (1-x)(1-w) & (1-w)^2 \end{bmatrix}^{-1} \]
+\[ = E\begin{bmatrix} x^2 - 2x + 1 & 1 - x - w + wx \\ 1 - x - w + wx & w^2 - 2w + 1 \end{bmatrix}^{-1} \]
+\[ = \begin{bmatrix} 3 - 2 + 1 & 1 - 1 - 1 + 1/2 \\ 1 - 1 - 1 + 1/2 & 2 - 2 + 1 \end{bmatrix}^{-1} \]
+\[ = \begin{bmatrix} 2 &  - 1/2 \\ - 1/2 & 1 \end{bmatrix}^{-1} \]
+\[ = \begin{bmatrix} 4/7 &  2/7 \\ 2/7 & 8/7 \end{bmatrix} \]
+\item \begin{enumerate}[label=(\roman*)]
+\item From lecture, we know
+\[\sqrt{n}(\hat{\theta} - \theta_0) \to_d N(0, ((G'WG)^{-1})'G'W\Omega W'G (G'WG)^{-1}) \]
+When $W = \Omega^{-1}$, we get
+\[ ((G'\Omega^{-1} G)^{-1})'G'(\Omega^{-1})'G (G'\Omega^{-1}G)^{-1} \]
+\[ = (G'\Omega^{-1}G)^{-1} \]
+\[ = \left(\left(\frac{\partial}{\partial \theta}Eg\right)'\Omega^{-1}\left(\frac{\partial}{\partial \theta}Eg\right)\right)^{-1} \]
+\[ = \left(\begin{bmatrix}3 & -1 \end{bmatrix}\begin{bmatrix} 4/7 &  2/7 \\ 2/7 & 8/7 \end{bmatrix} \begin{bmatrix}3 \\ -1 \end{bmatrix}\right)^{-1} \]
+\[ = \left(\frac{4}{7}9 + \frac{2}{7}(-3) + \frac{2}{7}(-3) + \frac{8}{7} \right)^{-1} \]
+\[ = \frac{7}{32} \]
+So
+\[\sqrt{n}(\hat{\theta} - \theta_0) \to_d N(0, 7/32) \]
+
+\item If $W = I$, then
+\[((G'WG)^{-1})'G'W\Omega W'G (G'WG)^{-1} = ((G'G)^{-1})'G'\Omega G (G'G)^{-1} \]
+\[ = \frac{1}{100} \begin{bmatrix}3 & -1 \end{bmatrix}\begin{bmatrix} 2 &  - 1/2 \\ - 1/2 & 1 \end{bmatrix} \begin{bmatrix}3 \\ -1 \end{bmatrix} \]
+\[ = \frac{1}{100} \left(2(9) - \frac{1}{2}(-3)- \frac{1}{2}(-3) + 1  \right) \]
+\[ = \frac{11}{50} \]
+So
+\[\sqrt{n}(\hat{\theta} - \theta_0) \to_d N(0, 11/50) \]
+\end{enumerate}
+\end{enumerate}
+\section*{Problem 2}
+\begin{enumerate}[label=(\alph*)]
+\item The Poisson pdf of $y|x$ is
+\[ e^{-e^{x'\theta}}\frac{(e^{x'\theta})^y}{y!} \]
+So the likelihood is
+\[ \prod_{i=1}^n e^{-e^{x_i'\theta}}\frac{(e^{x_i'\theta})^{y_i}}{y_i!} \]
+The log-likelihood is then
+\[ \sum_{i=1}^n -e^{x_i'\theta} + y_i x_i'\theta - \log(y_i!) \]
+\item \begin{enumerate}[label=(\roman*)]
+\item We have $\hat{\theta}_{ML} $ satisfies
+\[ 0 = \sum_{i=1}^n -x_{i,j} e^{x_i'\hat{\theta}_{ML}} + y_i x_{i,j} \]
+\[ 0 = \sum_{i=1}^n x_i (y_i - e^{x_i'\hat{\theta}_{ML}}  ) \]
+Define $g(y,x,\theta) = x(y - e^{x'\theta})$. Then $\hat{\theta}_{ML}$ is the GMM estimator associated with this $Eg = 0$ moment condition. We just need to show that $\theta_0$ satisfies the moment condition and the SOC holds. First, clearly
+\[ Eg(y,x,\theta_0) = E(x(y - e^{x'\theta_0})) = E(E(x(y - e^{x'\theta_0})|x))\]\[ = E(xE(y|x) - xe^{x'\theta_0}) = E(xe^{x'\theta_0} - xe^{x'\theta_0}) = 0 \]
+So $\theta_0$ satisfies the moment condition, and we know the GMM estimator is consistent so $\hat{\theta}_{ML}$ is consistent as long as the SOC holds:
+\[ G = \frac{\partial}{\partial \theta} Eg = -E(xx'e^{x'\theta_0}) \]
+Then
+\[ -v'E(xx'e^{x'\theta})v = - E(vxx'v'e^{x'\theta}) = -E(||vx||^2e^{x'\theta}) < 0 \]
+as long as $\exists x$ such that $P(vx) > 0 $ for all $v \neq 0$.
+\item Note that $G$ is symmetric from the previous part. The GMM variance under identity weight matrix is
+\[ ((G'G)^{-1})'G' \Omega G (G'G)^{-1} = G^{-1}\Omega G^{-1} \]
+Assuming this is nondegenerate ($G$ invertible), then since $H(\hat{\theta})^{-1}$ is a consistent estimator of $G^{-1}$, we only need $G$ invertible for $H(\hat{\theta})^{-1} \Omega(\hat{\theta})H(\hat{\theta})^{-1}$ to be a consistent estimator of the asymptotic variance. However, for $-H(\hat{\theta})^{-1}$ to be a consistent estimator of the asymptotic variance, we need
+\[ \Omega = -G^{-1} \]
+which happens iff
+\[E(x(y - e^{x'\theta})(x(y - e^{x'\theta}))'| x)= E((y - e^{x'\theta})^2 xx' | x) = E(xx'e^{x'\theta} | x) \]
+\[ E((y-e^{x'\theta})^2 | x) = e^{x'\theta} \implies V(y|x) = e^{x'\theta} \]
+Hence we also need $V(y|x) = e^{x'\theta}$ for $-H(\hat{\theta})^{-1}$ to be a consistent estimator of the variance.
+\end{enumerate}
+\end{enumerate}
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
