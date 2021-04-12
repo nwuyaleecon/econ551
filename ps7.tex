@@ -1,0 +1,57 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+	% packages that allow mathematical formatting
+
+\usepackage{graphicx}
+	% package that allows you to include graphics
+
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{Problem Set 7}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+
+
+\section*{Problem 1}
+\begin{enumerate}[label=(\alph*)]
+\item \[ E[h(1,u) - h(0,u)] = E[h(1,u)] - E[h(0,u)] = E[y|d=1] - E[y|d=0] = \tau + \alpha  - \alpha = \tau \]
+\item The estimator is given by
+\[ \frac{1}{N}\sum (y_i - \hat{\alpha} - \hat{\tau}d_i) = 0 \]
+\[ \frac{1}{N}\sum (y_i - \hat{\alpha} - \hat{\tau}d_i)d_i = 0 \]
+Let $D = \sum d_i$. Then
+\[ \frac{1}{N}\sum y_i = \hat{\alpha} + \hat{\tau}(D/N)  \]
+\[ \frac{1}{N}\sum y_id_i = \hat{\alpha}(D/N) + \hat{\tau}(D/N)  \]
+\[ \frac{D}{N^2}\sum y_i = \hat{\alpha}(D/N) + \hat{\tau}(D^2/N^2)  \]
+\[ \frac{1}{N}\sum y_id_i - (D/N)\frac{1}{N}\sum y_i  = \hat{\tau}(D/N)(1 - D/N)  \]
+\[ Cov(y, d) = \hat{\tau} Var(d) \]
+\[ \frac{Cov(y, d)}{Var(d)} = \hat{\tau} \]
+Note this is exactly the same as doing OLS on $y$ with $d$. See code. The estimated value is approx 886.3 with standard error approx 472.086
+\item See code and annotations for work. The estimate is 794.3885736971342 and the standard error is 480.3028362343343.
+\end{enumerate}
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
