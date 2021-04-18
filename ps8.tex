@@ -1,0 +1,133 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+	% packages that allow mathematical formatting
+
+\usepackage{graphicx}
+	% package that allows you to include graphics
+
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{Problem Set 8}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+
+
+\section*{Problem 1}
+\[ \gamma(k) = cov(y_t, y_{t-k}) \]
+\[ = cov\left(\mu + \epsilon_t + \sum_{j=1}^q \theta_j \epsilon_{t - j}, \mu + \epsilon_{t-k} + \sum_{j=1}^q \theta_j \epsilon_{t - k - j} \right) \]
+\[ = cov\left(\epsilon_t + \sum_{j=1}^q \theta_j \epsilon_{t - j}, \epsilon_{t-k} + \sum_{j=1}^q \theta_j \epsilon_{t - k - j} \right) \]
+\[ = E\left[\theta_k \epsilon_{t-k}^2 + \sum_{j=k+1}^q \theta_j \theta_{j-k} \epsilon_{t-j}^2 \right] \]
+\[ = \sigma^2 \left( \theta_k + \sum_{j=1}^{q-k} \theta_j \theta_{j+k} \right) \]
+if $ k \le q$. If $k > q$, then the covariance is just 0.
+\section*{Problem 2}
+From the theorem in the notes, we know that $y_t$ is strictly stationary and ergodic if
+\[ \left| \frac{\phi_1 \pm \sqrt{\phi_1^2 + 4\phi_2}}{2} \right| < 1 \]
+If $\phi_1^2 + 4\phi_2 \ge 0$, we need to show
+\[ \frac{\phi_1 + \sqrt{\phi_1^2 + 4\phi_2}}{2}  < 1 \]
+\[ \frac{\phi_1 - \sqrt{\phi_1^2 + 4\phi_2}}{2}  > -1 \]
+With some algebra, we get
+\[ \phi_1 + \sqrt{\phi_1^2 + 4\phi_2}  < 2 \]
+\[ \phi_1 - \sqrt{\phi_1^2 + 4\phi_2}  > -2 \]
+\[ \sqrt{\phi_1^2 + 4\phi_2}  < 2 - \phi_1 \]
+\[ \sqrt{\phi_1^2 + 4\phi_2}  < 2 + \phi_1 \]
+\[ \phi_1^2 + 4\phi_2  < 4 - 4\phi_1 + \phi_1^2 \]
+\[ \phi_1^2 + 4\phi_2  < 4 + 4\phi_1 + \phi_1^2 \]
+\[ \phi_2 + \phi_1 < 1 \]
+\[ \phi_2 - \phi_1  < 1  \]
+with the additional constraint that $-2 \le \phi_1 \le 2$. So for this case, we have:
+\[ \phi_1^2 + 4\phi_2 \ge 0 \]
+\[ -2 \le \phi_1 \le 2 \]
+\[ \phi_2 + \phi_1 < 1 \]
+\[ \phi_2 - \phi_1  < 1  \]
+Alternatively, if $\phi_1^2 + 4\phi_2 < 0 $, then the roots are imaginary, and so we get
+\[ \frac{\sqrt{\phi_1^2 - (\phi_1^2 + 4\phi_2)}}{2} < 1 \]
+\[ -\phi_2 < 1 \]
+\[ \phi_2 > -1 \]
+Hence in this case, the constraints are
+\[ \phi_1^2 + 4\phi_2 < 0 \]
+\[ \phi_2 > -1 \]
+
+\section*{Problem 3}
+\begin{enumerate}[label=(\alph*)]
+\item We have
+\[ var(\sqrt{T} \bar{y}_T) = \frac{1}{T}cov\left(\sum_{j=1}^T y_j, \sum_{j=1}^T y_j\right) \]
+\[ = \frac{1}{T}\sum_{j=1}^T\sum_{k=1}^T cov(y_j,y_k) \]
+\[ = \frac{1}{T}\sum_{j=1}^T\sum_{k=1}^T \gamma(|j-k|) \]
+\[ = \frac{1}{T}\left(\sum_{j=1}^T \sum_{k=j}^j \gamma(0) + \sum_{j=1}^T\sum_{k=j+1}^T \gamma(k-j) + \sum_{j=1}^T\sum_{k=1}^{j-1} \gamma(j-k) \right)\]
+\[ = \frac{1}{T}\left(T \gamma(0) + 2\sum_{j=1}^T\sum_{k=j+1}^T \gamma(k-j) \right)\]
+\[ = \frac{1}{T}\left(T \gamma(0) + 2\sum_{j=1}^{T-1}\sum_{i=1}^{T-j} \gamma(i) \right)\]
+\[ = \frac{1}{T}\left(T \gamma(0) + 2\sum_{i=1}^{T-1}\sum_{j=1}^{T-i} \gamma(i) \right)\]
+\[ = \frac{1}{T}\left(T \gamma(0) + 2\sum_{i=1}^{T-1} (T-i) \gamma(i) \right)\]
+\[ = \gamma_0 + \frac{2}{T} \sum_{i=1}^{T-1} (T-i) \gamma(i) \]
+\item From the previous part, we have
+\[ var(\sqrt{T} \bar{y}_T) = \gamma_0 + \frac{2}{T} \sum_{i=1}^{T-1} (T-i) \gamma(i) \]
+\[ = \gamma_0 + 2\sum_{i=1}^{T-1} \frac{T-i}{T} \gamma(i) \]
+\[  = \gamma_0 + 2\sum_{i=1}^{\infty} \frac{T-i}{T} \gamma(i) 1\{i<T\} \]
+Now, we have that since $0 \le \frac{T-i}{T} < 1$ and $0 \le 1\{i < T\} < 1$,
+\[ \left| \frac{T-i}{T} \gamma(i) 1\{i<T\} \right| =   \frac{T-i}{T}1\{i<T\}|\gamma(i)|< |\gamma(i)| \]
+Also,
+\[ \lim_{T \to \infty} \frac{T-i}{T} \gamma(i) 1\{i<T\} = \gamma(i) \]
+and by assumption,
+\[ \sum_{i=1}^\infty |\gamma(i)| < \infty \]
+So by the dominated convergence theorem,
+\[ \lim_{T\to\infty} var(\sqrt{T} \bar{y}_T) = \lim_{T\to\infty} \gamma_0 + 2\sum_{i=1}^{\infty} \frac{T-i}{T} \gamma(i) 1\{i<T\}   \]
+\[ = \gamma_0 + 2 \lim_{T \to \infty} \sum_{i=1}^{\infty} \frac{T-i}{T} \gamma(i) 1\{i<T\}  \]
+\[ = \gamma_0 + 2 \sum_{i=1}^{\infty} \lim_{T \to \infty}  \frac{T-i}{T} \gamma(i) 1\{i<T\}  \]
+\[ = \gamma_0 + 2 \sum_{i=1}^{\infty} \gamma(i) \]
+\[ = \gamma_0 + \sum_{i=1}^{\infty} \gamma(i) + \sum_{i=1}^{\infty} \gamma(i) \]
+\[ = \gamma_0 + \sum_{i=1}^{\infty} \gamma(-i) + \sum_{i=1}^{\infty} \gamma(i) \]
+\[ = \gamma_0 + \sum_{i=-1}^{-\infty} \gamma(i) + \sum_{i=1}^{\infty} \gamma(i) \]
+\[ = \sum_{i=-\infty}^{\infty} \gamma(i)  \]
+as desired.
+\end{enumerate}
+\section*{Problem 4}
+\begin{enumerate}[label=(\alph*)]
+\item We have
+\[ \gamma(k) = cov(y_t, y_{t-k}) \]
+\[ = cov(\alpha y_{t-1} + \epsilon_t, y_{t-k}) \]
+\[ = \alpha cov(y_{t-1}, y_{t-k}) + cov(\epsilon_t, y_{t-k}) \]
+\[ = \alpha \gamma(k-1) \]
+\[ = \alpha^k \gamma(0) \]
+And we have
+\[ \gamma(0) = var(y_t) = \alpha^2 var(y_{t-1}) + \sigma^2 = \alpha^2 \gamma(0) + \sigma^2 \]
+\[ \gamma(0) ( 1 - \alpha^2) = \sigma^2 \]
+\[ \gamma(0) = \frac{\sigma^2}{1-\alpha^2} \]
+and hence
+\[ \gamma(k) = \alpha^k \frac{\sigma^2}{1-\alpha^2} \]
+\item From the previous question, we have
+\[ var(\sqrt{T}\bar{y}_T) \to \sum_{k=-\infty}^\infty \gamma(k) \]
+\[ = \gamma(0) + 2 \sum_{k=1}^\infty \gamma(k) \]
+\[ = \frac{\sigma^2}{1-\alpha^2} + 2 \sum_{k=1}^\infty \alpha^k \frac{\sigma^2}{1-\alpha^2}  \]
+\[ = \frac{\sigma^2}{1-\alpha^2} + \frac{2\alpha}{1-\alpha} \frac{\sigma^2}{1-\alpha^2} \]
+\[ = \frac{\sigma^2}{1-\alpha^2}\left(1  + \frac{2\alpha}{1-\alpha} \right) \]
+\[ = \frac{\sigma^2}{1-\alpha^2}\left(\frac{1+\alpha}{1-\alpha} \right) \]
+\[ = \frac{\sigma^2}{(1-\alpha)^2} \]
+\[ = \left( \frac{\sigma}{1-\alpha}\right)^2 \]
+\end{enumerate}
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
