@@ -1,0 +1,83 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+	% packages that allow mathematical formatting
+
+\usepackage{graphicx}
+	% package that allows you to include graphics
+
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{Problem Set 9}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+
+
+\section*{Problem 1}
+\begin{enumerate}[label=(\alph*)]
+\item We know
+\[ P(T_i = 0 | z_i ) = Pr(z_i'\gamma + e_{0i} \le 0 | z_i ) \]
+ \[ = Pr(e_{0i} \le -z_i'\gamma  | z_i ) \]
+ \[ = \Phi(-z_i'\gamma)\]
+ Also
+ \[ f(y_i, T_i = 1 | x_i, z_i) = P(T_i = 1 | y^*_i, x_i, z_i) f(y^*_i|x_i,z_i) \]
+ \[ f(y_i, T_i = 1 | x_i, z_i) = P(e_{0i} > -z_i'\gamma | e_{1i} = y^*_i - \beta x_i, x_i, z_i) \frac{1}{\sigma}\phi\left(\frac{y^*_i - \beta x_i}{\sigma}\right) \]
+ \[ f(y_i, T_i = 1 | x_i, z_i) =\left(1 - \Phi \left( \frac{-z_i'\gamma - \frac{\rho}{\sigma^2}(y^*_i - \beta x_i)}{\sqrt{1 - (\rho/\sigma)^2}} \right) \right) \frac{1}{\sigma}\phi\left(\frac{y^*_i - \beta x_i}{\sigma}\right) \]
+ \[ = \Phi \left( \frac{z_i'\gamma + \frac{\rho}{\sigma^2}(y^*_i - \beta x_i)}{\sqrt{1 - (\rho/\sigma)^2}}  \right) \frac{1}{\sigma}\phi\left(\frac{y^*_i - \beta x_i}{\sigma}\right) \]
+ So the likelihood function is
+ \[ L =\left( \prod_{i | T_i = 0} \Phi(-z_i'\gamma) \right) \left( \prod_{i | T_i = 1}\Phi \left( \frac{z_i'\gamma + \frac{\rho}{\sigma^2}(y^*_i - \beta x_i)}{\sqrt{1 - (\rho/\sigma)^2}}  \right) \frac{1}{\sigma}\phi\left(\frac{y^*_i - \beta x_i}{\sigma}\right)  \right) \]
+\item $\hat{\gamma}$ is the probit estimator, so
+\[ \hat{\gamma} = \arg \max_\gamma \frac{1}{N} \sum_i \left(T_i \log(1 - \Phi(-z_i'\gamma)) + (1-T_i)\log \Phi(-z_i'\gamma) \right) \]
+The FOC is
+\[ \frac{1}{n}\sum_i \left(\frac{-\phi(-z_i'\gamma)(-z_i) T_i}{1 - \Phi(-z_i'\gamma)} + \frac{\phi(-z_i'\gamma)(-z_i)(1-T_i)}{\Phi(-z_i'\gamma)}\right) = 0 \]
+\[ \frac{1}{n}\sum_i z_i\left(\frac{\phi(-z_i'\gamma) T_i}{1 - \Phi(-z_i'\gamma)} - \frac{\phi(-z_i'\gamma)(1-T_i)}{\Phi(-z_i'\gamma)}\right) = 0 \]
+For $\hat{\beta}$ and the coefficient of $\lambda(z_i'\gamma)$ (call it $\hat{c}$), we get
+\[ \hat{\beta}, \hat{c} = \arg\min_{\beta, c} \frac{1}{N}\sum_i (y_i - \beta' x_i + c \lambda(z_i'\hat{\gamma}))^2 \]
+these have the FOC:
+\[ \frac{1}{N}\sum_i 2\begin{pmatrix} x_i \\ \lambda(z_i'\hat{\gamma}) \end{pmatrix}(y_i - \beta' x_i + c \lambda(z_i'\hat{\gamma})) = 0 \]
+\[ \frac{1}{N}\sum_i\begin{pmatrix} x_i \\ \lambda(z_i'\hat{\gamma}) \end{pmatrix}(y_i - \beta' x_i + c \lambda(z_i'\hat{\gamma})) = 0 \]
+So altogether:
+\[ \frac{1}{N}\sum_i \begin{pmatrix} z_i\left(\frac{\phi(-z_i'\gamma) T_i}{1 - \Phi(-z_i'\gamma)} - \frac{\phi(-z_i'\gamma)(1-T_i)}{\Phi(-z_i'\gamma)}\right)\\ \begin{pmatrix} x_i \\ \lambda(z_i'\hat{\gamma}) \end{pmatrix}(y_i - \beta' x_i + c \lambda(z_i'\hat{\gamma})) \end{pmatrix} = 0 \]
+and these are our equations.
+\end{enumerate}
+\section*{Problem 2}
+Let $e|x$ be distributed with cdf $F$.
+\[Q(\beta) = E[y I[x'\beta \ge 0] + (1-y) I[x'\beta < 0]] \]
+\[ = E[E[y|x] I[x'\beta \ge 0]+ (1-E[y|x]) (1 - I[x'\beta \ge 0])] \]
+\[ = E[E[y|x] I[x'\beta \ge 0]+ 1-E[y|x]  - (1 - E[y|x])I[x'\beta \ge 0])] \]
+\[ = E[(2E[y|x]-1) I[x'\beta \ge 0]+ 1-E[y|x]] \]
+\[ = E[(E[y|x]-E[1-y|x]) I[x'\beta \ge 0]]+ E[1-E[y|x]] \]
+\[ = E[(P(y=1|x)-P(y=0|x)) I[x'\beta \ge 0]]+ E[1-E[y|x]] \]
+\[ = E[(P(e \ge -x'\beta_0 | x)-P(e < -x'\beta_0 | x)) I[x'\beta \ge 0]]+ E[1-E[y|x]] \]
+\[ = E[(1 - F(-x'\beta_0) - F(-x'\beta_0) ) I[x'\beta \ge 0]]+ E[1-E[y|x]] \]
+\[ = E[(1 - 2F(-x'\beta_0)) I[x'\beta \ge 0]]+ E[1-E[y|x]] \]Further, we know that $(1-2F(x'\beta_0))I[x'\beta \ge 0] \le \max(1-2F(x'\beta_0), 0)$, so
+\[ Q(\beta) \le E[\max(1 - 2F(-x'\beta_0), 0)]+ E[1-E[y|x]] \]
+Now, we note that since the conditional median of $e$ given $x$ is 0, $F(0) = 1/2$, so $(1-2F(x'\beta_0))$ is nonnegative iff $x'\beta_0 \ge 0$. So for $\beta = \beta_0$, $(1-2F(x'\beta_0))I[x'\beta_0 \ge 0] = \max(1-2F(x'\beta_0), 0)$. Therefore,
+\[ Q(\beta_0) = E[(1 - 2F(-x'\beta_0)) I[x'\beta \ge 0]]+ E[1-E[y|x]] = E[\max(1 - 2F(-x'\beta_0), 0)]+ E[1-E[y|x]] \]
+Therefore, since $Q(\beta)$ is at most this bound, and $Q(\beta_0)$ equals the bound, we have $Q$ is maximized at $\beta_0$.
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
