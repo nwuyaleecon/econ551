@@ -1,0 +1,99 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+	% packages that allow mathematical formatting
+
+\usepackage{graphicx}
+	% package that allows you to include graphics
+
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{Problem Set 10}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+
+
+\section*{Problem 1}
+\begin{enumerate}[label=(\alph*)]
+\item To pin down $\beta$, we have
+\[ \frac{1}{T}\sum_{t=1}^T y_{it} = u_i + \left(\frac{1}{T}\sum_{t=1}^T x_{it}' \right)\beta + \frac{1}{T}\sum_{t=1}^T e_{it} \]
+\[ y_{it} - \frac{1}{T}\sum_{t=1}^T y_{it} = \left( x_{it}' - \frac{1}{T}\sum_{t=1}^T x_{it}' \right)\beta + e_{it} - \frac{1}{T}\sum_{t=1}^T e_{it} \]
+\[ \left(y_{it} - \frac{1}{T}\sum_{t=1}^T y_{it}\right) - \left( x_{it}' - \frac{1}{T}\sum_{t=1}^T x_{it}' \right)\beta  = e_{it} - \frac{1}{T}\sum_{t=1}^T e_{it} \]
+Since $E[e_{it}|x_{i1},x_{i2},...] = 0$, we get $E[x_{is}e_{it}] = 0$, and hence
+\[ E\left[\left( x_{it} - \frac{1}{T}\sum_{t=1}^T x_{it}\right) \left(\left(y_{it} - \frac{1}{T}\sum_{t=1}^T y_{it}\right) - \left( x_{it}' - \frac{1}{T}\sum_{t=1}^T x_{it}' \right)\beta \right) \right] \]\[= E\left[\left( x_{it} - \frac{1}{T}\sum_{t=1}^T x_{it}\right)  \left( e_{it} - \frac{1}{T}\sum_{t=1}^T e_{it}\right) \right] = 0 \]
+For $\mu_u$, we have
+\[ E\left[\frac{1}{T}\sum_{t=1}^T (y_{it} - x_{it}'\beta) - \mu_u \right] = E\left[\frac{1}{T}\sum_{t=1}^T (u_i + e_{it}) - \mu_u\right]\]
+\[ = E\left[u_i + \frac{1}{T}\sum_{t=1}^T  e_{it} - \mu_u \right] = \mu_u + 0 - \mu_u = 0 \]
+For $\mu_{ux}$, we get
+\[ E\left[\frac{1}{T}\sum_{t=1}^T x_{it}(y_{it} - x_{it}'\beta) - \mu_{ux} \right] = E\left[\frac{1}{T}\sum_{t=1}^T x_{it}(u_i + e_{it}) - \mu_{ux}\right]\]
+\[ = E\left[\frac{1}{T}\sum_{t=1}^T  x_{it} u_i + \frac{1}{T}\sum_{t=1}^T  x_{it} e_{it} - \mu_{ux}  \right] = \mu_{ux} + 0 - \mu_{ux} = 0 \]
+Lastly, for $\sigma_u^2$, we note that
+\[ E\left[\frac{1}{\binom{T}{2}}\sum_{s \neq t \in \{1,2, ... T\}} (y_{is} - x_{is}'\beta)(y_{it} - x_{it}'\beta) - \mu_{u}^2 - \sigma^2_u \right] = E\left[\frac{1}{\binom{T}{2}}\sum_{s \neq t \in \{1,2, ... T\}} (u_i + e_{is})(u_i + e_{it}) - \mu_{u}^2 - \sigma^2_u \right] \]
+\[ = E\left[\frac{1}{\binom{T}{2}}\sum_{s \neq t \in \{1,2, ... T\}} (u_i^2 + e_{is}u_i + e_{it}u_i + e_{is}e_{it}) - \mu_{u}^2 - \sigma^2_u \right] \]
+\[ = E\left[u_i^2 + \frac{1}{\binom{T}{2}}\sum_{s \neq t \in \{1,2, ... T\}} (e_{is}u_i + e_{it}u_i + e_{is}e_{it}) - \mu_{u}^2 - \sigma^2_u \right] = E[u_i^2] - \mu_u^2 - \sigma_u^2 = \sigma_u^2 - \sigma_u^2 = 0 \]
+So altogether:
+\[ g(x_i, y_i, \beta, \mu_u, \mu_{ux}, \sigma_u^2) = \begin{bmatrix}
+\left( x_{it} - \frac{1}{T}\sum_{t=1}^T x_{it}\right) \left(\left(y_{it} - \frac{1}{T}\sum_{t=1}^T y_{it}\right) - \left( x_{it}' - \frac{1}{T}\sum_{t=1}^T x_{it}' \right)\beta \right) \\
+\frac{1}{T}\sum_{t=1}^T (y_{it} - x_{it}'\beta) - \mu_u \\
+\frac{1}{T}\sum_{t=1}^T x_{it}(y_{it} - x_{it}'\beta) - \mu_{ux}  \\
+\frac{1}{\binom{T}{2}}\sum_{s \neq t \in \{1,2, ... T\}} (y_{is} - x_{is}'\beta)(y_{it} - x_{it}'\beta) - \mu_{u}^2 - \sigma^2_u \\
+\end{bmatrix} \]
+And we will have a unique solution as long as
+\[\left( x_{it} - \frac{1}{T}\sum_{t=1}^T x_{it}\right)\left( x_{it}' - \frac{1}{T}\sum_{t=1}^T x_{it}'\right) \]
+is invertible.
+
+\item We have that
+\[ E\left[\prod_{t=1}^l y_{it}\right] = E\left[\prod_{t=1}^l(u_i + e_{it})\right] \]
+\[ = E\left[\prod_{t=1}^l u_i\right]\]
+since $E[e_{it} | u_i, ... e_{is}, s\neq t] = 0$. Hence a consistent estimator is
+\[ \frac{1}{n}\sum_{i=1}^n \left( \prod_{t=1}^l y_{it} \right) \]
+We need $T \ge l$.
+\end{enumerate}
+\section*{Problem 2}
+We have
+\[ f(y_{it}|u,\sigma^2) = \frac{1}{\sigma}\phi\left(\frac{y_{it} - u_i}{\sigma} \right) \]
+So the log-likelihood is
+\[ l(\mu, \sigma^2) = \sum_{i=1}^n \sum_{t=1}^2 \left(\log \phi\left(\frac{y_{it} - u_i}{\sigma} \right) - \log \sigma  \right) \]
+\[  = \sum_{i=1}^n \sum_{t=1}^2 \left(-\frac{1}{2}\left(\frac{y_{it} - u_i}{\sigma} \right)^2 - \frac{1}{2}\log(2\pi) - \frac{1}{2}\log \sigma^2  \right) \]
+Taking the FOCs,
+\[ \frac{\partial l}{\partial u_i} = - \sum_{t=1}^2 \left(\frac{y_{it} - u_i}{\sigma} \right) = 0\]
+\[  \sum_{t=1}^2 y_{it} - 2u_i = 0\]
+\[ \hat{u_i} = \frac{y_{i1} + y_{i2}}{2} \]
+and
+\[ \frac{\partial l}{\partial \sigma^2 } = \sum_{i=1}^n \sum_{t=1}^2 \left(\frac{1}{2}\left(\frac{(y_{it} - u_i)^2}{(\sigma^2)^2} \right) - \frac{1}{2}\frac{1}{\sigma^2} \right) = 0\]
+\[ \sum_{i=1}^n \sum_{t=1}^2 \left((y_{it} - u_i)^2 \right) - 2n\sigma^2  = 0\]
+\[ \hat{\sigma}^2 = \frac{1}{2n}\sum_{i=1}^n \sum_{t=1}^2 \left((y_{it} - u_i)^2 \right)  \]
+\[ = \frac{1}{2n}\sum_{i=1}^n \sum_{t=1}^2 \left(y_{it} - \frac{y_{i1} + y_{i2}}{2}\right)^2   \]
+\[ = \frac{1}{2n}\sum_{i=1}^n \left(\frac{y_{i1} - y_{i2}}{2}\right)^2 +  \left( \frac{y_{i1} - y_{i2}}{2}\right)^2  \]
+\[ = \frac{1}{n}\sum_{i=1}^n \left(\frac{y_{i1} - y_{i2}}{2}\right)^2  \]
+\[ = \frac{1}{4n}\sum_{i=1}^n \left(y_{i1} - y_{i2}\right)^2  \]
+This probability limit is
+\[ \hat{\sigma}^2 = \frac{1}{4} \left( \frac{1}{n}(y_{i1} - y{i2})^2 \right) \to_p \frac{1}{4}E(y_{i1}-y_{i2})^2 \]
+\[ = \frac{1}{4}E(e_{i1}-e_{i2})^2 = \frac{1}{4}(2\sigma^2) = \frac{1}{2}\sigma^2 \]
+
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
